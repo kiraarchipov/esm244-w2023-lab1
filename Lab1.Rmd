@@ -65,6 +65,19 @@ ggplot(data = blackwood_acacia, aes(x = longitude, y = latitude)) +
   geom_point()
 ```
 
+## Use tidyR::separate()
+use it to separate one column into multiple 
+
+### use tidyR::unite() to rejoin 
+```{r}
+sf_trees_sep <- sf_trees %>% 
+  separate(species, into = c('spp_scientific', 'spp_common'), sep = ' :: ')
+
+#reverse we want to combine two (or multiple) columns into one 
+
+sf_trees_unite <- sf_trees %>% 
+  unite("id_status", tree_id:species, sep = '_NEW_')
+```
 
 
 
