@@ -43,7 +43,27 @@ ggplot(data = top_5_status, aes(x = fct_reorder(legal_status, tree_count),
   labs(y = 'Tree Count', x = 'Legal Status') + coord_flip() + theme_minimal()
 ```
 
+### Playing with filtering - keep obs where legal status is "permitted sites" and aretaker is MTA
+```{r}
+#sf_trees$legal_status %>% unique()
+# gives you list of all unique values of legal status column 
 
+permitted_mta <- sf_trees %>% filter(legal_status =="Permitted Site" & caretaker == "MTA")
+
+```
+
+### Keep blackwood acacia trees , only legal status, date, lat and long columns 
+```{r}
+blackwood_acacia <- sf_trees %>% 
+  filter(str_detect(species, "Blackwood Acacia")) %>% 
+  select(legal_status, date, latitude, longitude)
+
+
+#Make a plot of SF acacia trees
+
+ggplot(data = blackwood_acacia, aes(x = longitude, y = latitude)) + 
+  geom_point()
+```
 
 
 
